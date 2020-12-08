@@ -33,6 +33,7 @@ Release
 *.comemgui
 *.cproject
 *.project
+*.mxproject
 debug.config
 
 # JLink
