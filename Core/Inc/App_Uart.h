@@ -10,8 +10,12 @@
 
 #include "stdint.h"
 
-void UART_Write(void); // Función para enviar un dato a través de la UART.
-void UART_String(const char* str, uint16_t sz); // Función para enviar una cadena de datos a través de la UART.
+/*
+ * -> void UART_String(const char* str, uint16_t sz) : Función para enviar una cadena de datos a través de la UART
+ * str = cadena
+ * sz = tamaño de la cadena
+*/
+void UART_String(const char* str, uint16_t sz); // .
 
 
 #endif /* INC_APP_UART_H_ */

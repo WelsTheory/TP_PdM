@@ -11,16 +11,21 @@ tick_t tickCounter = 0;
 TIM_HandleTypeDef htim11;
 //UART_HandleTypeDef huart2;
 
+//Función Inicializa los periféricos
 void boardInit(void){
 	HAL_Init();
 	SystemClock_Config();
-	MX_GPIO_Init();
-	MX_USART2_UART_Init();
-	MX_TIM11_Init();
+	MX_GPIO_Init(); //GPIO Inicialización
+	MX_USART2_UART_Init(); //UART Inicialización
+	MX_TIM11_Init(); //Timer 11 Inicialización
 	HAL_TIM_Base_Start_IT(&htim11);
 }
 
-/*Delay no Bloqueante */
+//Delay No Bloqueante
+/*
+ * -> void delay_ms(delay_t * delay,tick_t duration) : Función para crear el delay y la duración
+ * -> bool_t delayRead(delay_t * delay) : Lee si el retardo se efectuó
+ * */
 void delay_ms(delay_t * delay,tick_t duration){
 	delay->duration = duration/1;
 	delay->running = 0;
@@ -43,15 +48,16 @@ bool_t delayRead(delay_t * delay){
 	return timeArrived;
 }
 
-void delayWrite(delay_t * delay, tick_t duration){
-	delay->duration = duration/1;
-}
-
+//Delay Bloqueante
+/*
+ * -> void tickRead(void) : Retorna el valor tickCounter del Callback Timer 11
+ * -> void tickWrite(uint16_t ticks) : Escribe el valor tick en tickCounter
+ * -> void delay(uint16_t ticks) : Función retardo
+ * */
 uint16_t tickRead(void){
 	return tickCounter;
 }
 
-/*Delay Bloqueante */
 void tickWrite(uint16_t ticks){
 	tickCounter = ticks;
 }
@@ -59,11 +65,11 @@ void tickWrite(uint16_t ticks){
 void delay(uint16_t ticks){
 	uint16_t tiempo = 0;
 	tiempo = tickRead();
-	while((tickRead() - tiempo) <= ticks); //while ( (tick_t)(tickRead() - startTime) < duration_ms/tickRateMS );
+	while((tickRead() - tiempo) <= ticks);
 	tickWrite(0);
 }
 
-
+// Función Inicializa el Clock
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -218,9 +224,9 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+// Función CallBack Timer 11
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim11){
-		//HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
 		tickCounter++;
 	}
 }

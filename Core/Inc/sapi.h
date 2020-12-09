@@ -14,7 +14,7 @@
 //#include "semaforo.h"
 
 
-//Estados
+//Estados LOW y True
 #ifndef LOW
 #define LOW 	0
 #endif
@@ -23,7 +23,7 @@
 #define TRUE	1
 #endif
 
-//Estados lógicos
+//Estados lógicos TRUE y FALSE
 #ifndef	FALSE
 #define FALSE	0
 #endif
@@ -32,11 +32,11 @@
 #define TRUE	(!FALSE)
 #endif
 
-//Variable
+//Variables bool_t y tick_t
 typedef uint8_t bool_t;
 typedef uint16_t tick_t;
 
-//Funciones Delay
+//Declaración de estructuras delay_t
 typedef struct{
 	tick_t startTime;
 	tick_t duration;
@@ -45,19 +45,25 @@ typedef struct{
 
 UART_HandleTypeDef huart2;
 
-//HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
-
+//Delay No Bloqueante
+/*
+ * -> void delay_ms(delay_t * delay,tick_t duration) : Función para crear el delay y la duración
+ * -> bool_t delayRead(delay_t * delay) : Lee si el retardo se efectuó
+ * */
 void delay_ms(delay_t * delay,tick_t duration);
 bool_t delayRead(delay_t * delay);
-void delayWrite(delay_t * delay, tick_t duration);
 
-void boardInit(void);
+//Delay Bloqueante
+/*
+ * -> void tickRead(void) : Retorna el valor tickCounter del Callback Timer 11
+ * -> void tickWrite(uint16_t ticks) : Escribe el valor tick en tickCounter
+ * -> void delay(uint16_t ticks) : Función retardo
+ * */
 uint16_t tickRead(void);
 void tickWrite(uint16_t ticks);
 void delay(uint16_t ticks);
 
-//UART
-void Tx_Data(uint8_t *Data);
-void Tx_dato(void);
+// Función de inicialización
+void boardInit(void);
 
 #endif /* INC_SAPI_H_ */

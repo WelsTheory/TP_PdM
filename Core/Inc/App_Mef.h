@@ -8,6 +8,7 @@
 #ifndef INC_APP_MEF_H_
 #define INC_APP_MEF_H_
 
+// Estructura MEFEstado
 typedef enum{
 	ESTADO_NORMAL,
 	ESTADO_LENTO,
