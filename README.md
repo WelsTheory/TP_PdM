@@ -1,11 +1,11 @@
 
 ## Trabajo Practico - Programación de Microprocesadores
 
-###Aplicación:
+### Aplicación:
   
   El sistema empieza a ejecutar en el modo de operación **Normal**, cuando el usuario presiona la tecla B1 el sistema cambia el modo de operación **Lento**, cuando el usuario presiona la tecla B2 el sistema cambia el modo de operación **Rápido** y cuando el usuario presiona la tecla B3 el sistema cambia el modo de operación **Normal**.
 
-  **Modos de operación** 
+## Modos de operación** 
 	*Normal: Se envía el mensaje "Estado Normal" a través de la UART cada 500ms.
 	*Lento: Se envía el mensaje "Estado Lento" a través de la UART cada 2 segundos.
 	*Rápido: Se envía el mensaje "Estado Rápido" a través de la UART cada 100ms.
